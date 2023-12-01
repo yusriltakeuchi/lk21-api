@@ -14,7 +14,7 @@
         "serve": "concurrently \"npm run watch\" \"nodemon dist/index.js\"",
         "start": "node src/index.ts",
         "prepare": "husky install",
-        "server": "nodemon src/index.js",
+        "server": "nodemon src/index.ts",
         "format": "prettier --write .",
         "add-build": "git add dist",
         "test": "echo \"Error: no test specified\" && exit 1"
