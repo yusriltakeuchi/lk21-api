@@ -1,7 +1,7 @@
 {
     "name": "lk21-api",
     "version": "1.0.0",
-    "description": "Unofficial LK21 API",
+    "description": "Unofficial LK21 API new",
     "main": "dist/index.js",
     "private": true,
     "_moduleAliases": {
