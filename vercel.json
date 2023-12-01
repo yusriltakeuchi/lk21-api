@@ -7,6 +7,9 @@
             "config": { "includeFiles": ["dist/**"] }
         }
     ],
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" }
+    ],
     "routes": [
         {
             "src": "/(.*)",
