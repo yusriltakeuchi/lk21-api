@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { NextFunction as Next, Request, Response } from 'express';
 import { scrapeMovieDetails, scrapeMovies } from '@/scrapers/movie';
+import { SendResponse } from "@/dto/response_dto";
 
 type TController = (req: Request, res: Response, next?: Next) => Promise<void>;
 
@@ -17,16 +18,15 @@ export const latestMovies: TController = async (req, res) => {
         const axiosRequest = await axios.get(
             `${process.env.LK21_URL}/latest${
                 Number(page) > 1 ? `/page/${page}` : ''
-            }`
+            }`,
         );
-
         const payload = await scrapeMovies(req, axiosRequest);
 
-        res.status(200).json(payload);
+        res.status(200).json(SendResponse(true, payload));
     } catch (err) {
         console.error(err);
 
-        res.status(400).json(null);
+        res.status(400).json(SendResponse(false, null));
     }
 };
 
@@ -49,11 +49,11 @@ export const popularMovies: TController = async (req, res) => {
         // scrape popular movies
         const payload = await scrapeMovies(req, axiosRequest);
 
-        res.status(200).json(payload);
+        res.status(200).json(SendResponse(true, payload));
     } catch (err) {
         console.error(err);
 
-        res.status(400).json(null);
+        res.status(400).json(SendResponse(false, null));
     }
 };
 
@@ -75,11 +75,11 @@ export const recentReleaseMovies: TController = async (req, res) => {
 
         const payload = await scrapeMovies(req, axiosRequest);
 
-        res.status(200).json(payload);
+        res.status(200).json(SendResponse(true, payload));
     } catch (err) {
         console.error(err);
 
-        res.status(400).json(null);
+        res.status(400).json(SendResponse(false, null));
     }
 };
 
@@ -101,11 +101,11 @@ export const topRatedMovies: TController = async (req, res) => {
 
         const payload = await scrapeMovies(req, axiosRequest);
 
-        res.status(200).json(payload);
+        res.status(200).json(SendResponse(true, payload));
     } catch (err) {
         console.error(err);
 
-        res.status(400).json(null);
+        res.status(400).json(SendResponse(false, null));
     }
 };
 
@@ -123,10 +123,10 @@ export const movieDetails: TController = async (req, res) => {
 
         const payload = await scrapeMovieDetails(req, axiosRequest);
 
-        res.status(200).json(payload);
+        res.status(200).json(SendResponse(true, payload));
     } catch (err) {
         console.error(err);
 
-        res.status(400).json(null);
+        res.status(400).json(SendResponse(false, null));
     }
 };
